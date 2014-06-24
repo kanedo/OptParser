@@ -1,3 +1,16 @@
+/**
+ * OptParser class.
+ *
+ * A Class to parse CLI Options in a readable and easy way.
+ * inspired by Rubys OptionParser
+ *
+ * @package   Kanedo::OptParser
+ * @author    kanedo <software@kanedo.net>
+ * @license   GPL-2.0+
+ * @link      http://kanedo.net
+ * @copyright 2014 kanedo
+ */
+
 #ifndef OPTPARSER_H
 #define OPTPARSER_H
 #include <string>
@@ -5,6 +18,7 @@
 #include <unordered_map>
 #include <iostream>
 #include <algorithm>
+
 namespace Kanedo{
 	using std::cout;
 	using std::endl;
@@ -14,6 +28,11 @@ namespace Kanedo{
 	using std::string;
 	using std::ostream;
 
+	/**
+	 * Class OptParser
+	 * use this class to parse CLI Options.
+	 * inspired by Rubys OptionParser class
+	 */
 	class OptParser {
 	protected:
 		struct Option{

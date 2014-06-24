@@ -105,6 +105,7 @@ namespace Kanedo{
 		if(use_default){
 			this->defaults.insert(make_pair(name, default_val));
 		}
+		opt.flag = false;
 		this->options.insert(make_pair(name, opt));
 		this->max_short = max(this->max_short, short_opt.length());
 		this->max_long = max(this->max_long, long_opt.length());
@@ -129,6 +130,23 @@ namespace Kanedo{
 			this->options[name].use_default = true;
 			this->defaults.insert(make_pair(name, value));
 		}
+	}
+
+	void OptParser::addFlag(string name, string short_opt, string long_opt, string descr){
+		Option opt;
+		opt.name = name;
+		opt.short_opt = short_opt;
+		opt.long_opt = long_opt;
+		opt.descr = descr;
+		opt.required = false;
+		opt.default_val = "";
+		opt.use_default = false;
+		opt.flag = true;
+
+		this->options.insert(make_pair(name, opt));
+		this->max_short = max(this->max_short, short_opt.length());
+		this->max_long = max(this->max_long, long_opt.length());
+		this->max_name = max(this->max_name, name.length());
 	}
 
 	std::unordered_map<string, OptParser::Option>::iterator OptParser::findOption(string argv){
@@ -173,7 +191,7 @@ namespace Kanedo{
 		}
 		vector<string> required = this->required;
 		unordered_map<string, string> defaults = this->defaults;
-		for (int i = 0; i < argc-1; ++i) {
+		for (int i = 0; i < argc; ++i) {
 			string arg_name = string(argv[i]);
 			std::unordered_map<string, OptParser::Option>::iterator opt_iterator = this->findOption(argv[i]);
 			if (opt_iterator != this->options.end()) {
@@ -186,8 +204,10 @@ namespace Kanedo{
 						}
 					}
 				}
-				this->values.insert(make_pair(arg_name, argv[++i]));
-				if(defaults.find(arg_name) != defaults.end()){
+				if(opt.flag){
+					this->flag_values[opt.name] = true;
+				}else if(i < argc - 1){
+					this->values.insert(make_pair(opt.name, argv[++i]));
 					defaults.erase(arg_name);
 				}
 			}
@@ -209,5 +229,12 @@ namespace Kanedo{
 
 	string OptParser::getValue(string name){
 		return this->values[name];
+	}
+
+	bool OptParser::isSet(string name){
+		if(this->flag_values.find(name) != this->flag_values.end()){
+			return true;
+		}
+		return false;
 	}
 }

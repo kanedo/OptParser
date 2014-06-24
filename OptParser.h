@@ -44,8 +44,10 @@ namespace Kanedo{
 			bool required;
 			string default_val;
 			bool use_default;
+			bool flag;
 		};
 		unordered_map<string, string> values;
+		unordered_map<string, bool> flag_values;
 		vector<string> required;
 		unordered_map<string, Option> options;
 		unordered_map<string, string> defaults;
@@ -114,6 +116,15 @@ namespace Kanedo{
 		void	setDefaultValue(string name, string value);
 
 		/**
+		 * add a simple flag parameter without values. just set or not-set
+		 * @param  name        the name of the flag used in @see OptParser::isSet
+		 * @param  short_opt   the short variant of this flag (w/o -)
+		 * @param  long_opt    the long variant of this flag (w/o --)
+		 * @param  description a description of what this options is used for
+		 */
+		void 	addFlag(string name, string short_opt, string long_opt, string descr);
+
+		/**
 		 * returns the value of given option. 
 		 * If option does not exists it'll return an empty string
 		 * If option is not set an has a default value the default is used
@@ -121,6 +132,13 @@ namespace Kanedo{
 		 * @return string
 		 */
 		string	getValue(string name);
+
+		/**
+		 * returns true if Flag is set @see OptParser::addFlag
+		 * @param  name [description]
+		 * @return      [description]
+		 */
+		bool	isSet(string name);
 		
 		/**
 		 * return the Help text

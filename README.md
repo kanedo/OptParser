@@ -48,3 +48,10 @@ initial Version.
 - bugfix: use const for argc in parseOptions
 - use 3-colum layout for usage. Short-Opts and long-opts are now prettier aligned
 - added `example.cpp` with usage examples
+
+### 1.0.2 (2014-06-24)
+
+- fixed typo (thanks @badboy)
+- use 4-col layout for usage. No short-opts, long-opts and names are aligned pretty
+- added flags. Options without values. Just binary. e.g help or -h is now possible
+- made the generation of usage text a bit more efficient and better readable

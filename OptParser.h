@@ -6,9 +6,10 @@
  *
  * @package   Kanedo::OptParser
  * @author    kanedo <software@kanedo.net>
- * @license   GPL-2.0+
+ * @license   MIT
  * @link      http://kanedo.net
  * @copyright 2014 kanedo
+ * @version   1.0.0
  */
 
 #ifndef OPTPARSER_H

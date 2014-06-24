@@ -21,3 +21,8 @@ string option_default  = options->getValue("option_default");	// returns "defaul
 string option          = options->getValue("option");			// return an empty string if not specified
 
 ```
+
+## Changelog
+
+### 1.0.0 (2014-06-24)
+initial Version. 

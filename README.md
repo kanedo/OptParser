@@ -12,6 +12,7 @@ options->setHelpText("this is an example app to demonstrate the usage of OptPars
 options->setOption("required_option", "r", "required-option", "This is a required option you must specify", true);
 options->setOption("option_default", "d", "default-option", "This is an option with a default value", false, "default value");
 options->setOption("option", "o", "option", "This is a normal option");
+options->addFlag("flag", "f", "flag", "use flags to add binary values");
 if(!options->parseOptions(argc, argv)){
 	return EXIT_FAILURE;
 }
@@ -19,17 +20,22 @@ if(!options->parseOptions(argc, argv)){
 string required_option = options->getValue("required_option");
 string option_default  = options->getValue("option_default");	// returns "default value" if not specified
 string option          = options->getValue("option");			// return an empty string if not specified
+if(options->isSet("flag")){
+		cout << "flag is set " << endl;
+}
 
 ```
 
 ## Sample output
 
 ```
-error: not enought options given
+error: not enough options given
 this is an example app to demonstrate the usage of OptParser
-	-ro,  	--required-option 	required_option (required) This is a required option you must specify 
-	-d,   	--default-option  	option_default This is an option with a default value default: default value
-	-o,   	--option          	option This is a normal option 
+Usage: ./example_app [options] 
+  -o  --option          option          This is a normal option
+  -d  --default-option  option_default  [default: default value] This is an option with a default value
+  -f  --flag            flag            use flags to add binary values
+  -ro --required-option required_option (required) This is a required option you must specify
 ```
 
 ## Changelog

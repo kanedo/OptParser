@@ -129,7 +129,7 @@ namespace Kanedo{
 		return this->options.end();
 	}
 
-	bool OptParser::parseOptions(int argc, char* argv[]){
+	bool OptParser::parseOptions(int argc, const char* argv[]){
 		if((argc-1)/2 < this->required.size()){
 			*this->output << "error: not enought options given" << endl;
 			this->showUsage();

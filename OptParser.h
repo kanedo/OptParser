@@ -134,7 +134,7 @@ namespace Kanedo{
 		 * @param  char** argv parameters array
 		 * @return bool        true if parsing went well, false otherwise. Usage is shown automatically
 		 */
-		bool	parseOptions(int argc, char* argv[]);
+		bool	parseOptions(int argc, const char* argv[]);
 		
 	};}
 #endif

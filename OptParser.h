@@ -50,6 +50,12 @@ namespace Kanedo{
 		unordered_map<string, Option> options;
 		unordered_map<string, string> defaults;
 		string help;
+		string binary_name;
+
+		size_t max_name;
+		size_t max_long;
+		size_t max_short;
+
 		void	setOption(string name, string short_opt, string long_opt, string descr, bool required, string default_val, bool use_default);
 		
 		bool strict;

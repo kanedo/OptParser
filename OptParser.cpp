@@ -22,27 +22,45 @@ namespace Kanedo{
 	string OptParser::getUsageText(){
 		string output = this->getHelpText();
 		output += "\n";
-		unordered_map<string, string> options_output;
-		size_t max_length = 0;
+		unordered_map<string, string> options_short_output;
+		unordered_map<string, string> options_long_output;
+		size_t short_max_length = 0, long_max_length = 0;
 		for(unordered_map<string, Option>::iterator option = this->options.begin(); option != this->options.end(); ++option){
 			string option_output = "";
 			option_output.append("\t");
 			option_output.append("-");
 			option_output.append(option->second.short_opt);
 			option_output.append(", ");
-			option_output.append("--");
-			option_output.append(option->second.long_opt);
-			options_output.insert(make_pair(option->second.name, option_output));
-			max_length = max(max_length, option_output.length());
+			options_short_output.insert(make_pair(option->second.name, option_output));
+			short_max_length = max(short_max_length, option_output.length());
 		}
 
-		for (unordered_map<string, string>::iterator option = options_output.begin(); option != options_output.end(); ++option) {
+		for(unordered_map<string, Option>::iterator option = this->options.begin(); option != this->options.end(); ++option){
+			string option_output = "";
+			option_output.append("--");
+			option_output.append(option->second.long_opt);
+			options_long_output.insert(make_pair(option->second.name, option_output));
+			long_max_length = max(long_max_length, option_output.length());
+		}
+
+		unordered_map<string, string>::iterator option_long = options_long_output.begin();
+		for (unordered_map<string, string>::iterator option_short = options_short_output.begin(); option_short != options_short_output.end(); ++option_short) {
 			
-			output.append(option->second);
-			for (size_t i = 0; i < (max_length - option->second.length()) + 1; ++i) {
+			output.append(option_short->second);
+			for (size_t i = 0; i < (short_max_length - option_short->second.length()) + 1; ++i) {
 				output.append(" ");
 			}
-			Option opt = this->options[option->first];
+
+			output.append("\t");
+
+			output.append(option_long->second);
+			for (size_t i = 0; i < (long_max_length - option_long->second.length()) + 1; ++i) {
+				output.append(" ");
+			}
+
+			output.append("\t");
+
+			Option opt = this->options[option_short->first];
 			output.append(opt.name);
 			output.append(" ");
 			if(opt.required){
@@ -57,6 +75,7 @@ namespace Kanedo{
 				output.append(opt.default_val);
 			}
 			output.append("\n");
+			++option_long;
 		}
 		return output;
 	}

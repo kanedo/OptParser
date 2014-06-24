@@ -26,3 +26,9 @@ string option          = options->getValue("option");			// return an empty strin
 
 ### 1.0.0 (2014-06-24)
 initial Version. 
+
+### 1.0.1 (2014-06-24)
+
+- bugfix: use const for argc in parseOptions
+- use 3-colum layout for usage. Short-Opts and long-opts are now prettier aligned
+- added `example.cpp` with usage examples

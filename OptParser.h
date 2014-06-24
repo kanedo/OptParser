@@ -9,7 +9,7 @@
  * @license   MIT
  * @link      http://kanedo.net
  * @copyright 2014 kanedo
- * @version   1.0.0
+ * @version   1.0.1
  */
 
 #ifndef OPTPARSER_H

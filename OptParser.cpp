@@ -161,7 +161,7 @@ namespace Kanedo{
 			this->binary_name = string(argv[0]);
 		}
 		if((argc-1)/2 < this->required.size()){
-			*this->output << "error: not enought options given" << endl;
+			*this->output << "error: not enough options given" << endl;
 			this->showUsage();
 			return false;
 		}

@@ -22,6 +22,16 @@ string option          = options->getValue("option");			// return an empty strin
 
 ```
 
+## Sample output
+
+```
+error: not enought options given
+this is an example app to demonstrate the usage of OptParser
+	-ro,  	--required-option 	required_option (required) This is a required option you must specify 
+	-d,   	--default-option  	option_default This is an option with a default value default: default value
+	-o,   	--option          	option This is a normal option 
+```
+
 ## Changelog
 
 ### 1.0.0 (2014-06-24)

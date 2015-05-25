@@ -19,3 +19,7 @@
 *.exe
 *.out
 *.app
+Makefile
+CMakeFiles
+Kanedo_OptParser_Example
+cmake_install.cmake
